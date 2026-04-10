@@ -33,6 +33,9 @@ type SceneGeometry = {
   fitMatrix: Float32Array;
 };
 
+const assetBase = import.meta.env.BASE_URL;
+const assetUrl = (path: string) => `${assetBase}${path}`;
+
 const shapeSources: Record<ShapeName, { url: string; name: string; preset: BoundsPreset; fallback: () => IndexedMesh }> = {
   cube: {
     url: "",
@@ -47,13 +50,13 @@ const shapeSources: Record<ShapeName, { url: string; name: string; preset: Bound
     fallback: () => createSphereMesh(48, 48),
   },
   beacon: {
-    url: "/models/KAUST_Beacon.obj",
+    url: assetUrl("models/KAUST_Beacon.obj"),
     name: "beacon",
     preset: { kind: "sphere", center: [125, 125, 125], radius: 125 },
     fallback: () => createCubeMesh(),
   },
   teapot: {
-    url: "/models/teapot.obj",
+    url: assetUrl("models/teapot.obj"),
     name: "teapot",
     preset: {
       kind: "box",
